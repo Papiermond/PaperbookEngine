@@ -31,16 +31,18 @@ set_up_openGL_Renderer :: proc() -> int
         window = glfw.CreateWindow(WindowStats.width, WindowStats.height, WindowStats.window_handle, nil, nil)
         defer glfw.DestroyWindow(window)
 
+        //Create Context
+        {
+            glfw.MakeContextCurrent(window)
+        }
+
         if window == nil
         {
             util.print_message("Failed to create Window")
             return -1
         }
 
-    // Create Context
-        {
-            glfw.MakeContextCurrent(window)
-        }
+    // 
    
     // Enable VSync
         if WindowStats.vsync
@@ -69,16 +71,17 @@ set_up_openGL_Renderer :: proc() -> int
         {
             glfw.PollEvents()
 
+            
             game_update()
 
             draw()
 
             glfw.SwapBuffers(window)
         }
-    
+        defer util.print_message("Godbye, Renderer!")
     renderer_exit()
 
-    util.print_message("Godbye, Renderer!")
+   
 
     return 0
 }
@@ -101,9 +104,11 @@ draw :: proc()
 {
 	// Set the opengl clear color
 	// 0-1 rgba values
-	ogl.ClearColor(0.2, 0.3, 0.3, 1.0)
+	ogl.ClearColor(0,0,0,0)
 	// Clear the screen with the set clearcolor
 	ogl.Clear(ogl.COLOR_BUFFER_BIT)
+
+  
 
 	// Own drawing code here
 }

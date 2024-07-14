@@ -90,7 +90,7 @@ set_up_openGL_Renderer :: proc() -> int
 size_callback :: proc "c" (window: glfw.WindowHandle, width, height: i32) 
 {
 	// Set the OpenGL viewport size
-	ogl.Viewport(0, 0, width, height)
+	ogl.Viewport(0, 0, width + 20, height + 20)
 }
 
 
